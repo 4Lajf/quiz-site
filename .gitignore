@@ -1,0 +1,13 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+todo
+todoStore.js
+profile
+test
+old
+forgotpassword
+amq

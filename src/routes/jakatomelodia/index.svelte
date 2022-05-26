@@ -1,0 +1,172 @@
+<script>
+	import { supabase } from '../../supabase';
+	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { handleNotes, chooseATeam, renderNotes } from '../../stores/JTMStore';
+	import { failure } from '../../stores/buttonStore';
+
+	let thinking = false,
+		status = 0,
+		showNotes,
+		test;
+
+	let team = null,
+		notes = null,
+		mode = 0;
+
+	$: showNotes = '';
+
+	const execRenderNotes = async () => {
+		showNotes = await renderNotes();
+	};
+
+	const execChooseATeam = async (team) => {
+		if (!team) {
+			failure('Please enter the team name', 5000);
+			thinking = false;
+			return;
+		}
+
+		try {
+			const mySubscription = supabase
+				.from('JTM')
+				.on('UPDATE', (payload) => {
+/* 					console.log('Change received!', payload); */
+					execRenderNotes();
+				})
+				.subscribe();
+
+			thinking = true;
+			await chooseATeam(team);
+			showNotes = await renderNotes();
+			status = 1;
+		} finally {
+			thinking = false;
+		}
+	};
+
+	const execHandleNotes = async (team, mode, notes) => {
+		try {
+			thinking = true;
+			await handleNotes(team, mode, notes);
+			showNotes = await renderNotes();
+			notes = '';
+		} finally {
+			thinking = false;
+		}
+	};
+</script>
+
+<main>
+	<SvelteToast options={{ reversed: true, pausable: true, duration: 2500, intro: { y: 192 } }} />
+	{#if status === 0}
+		<div class="flex items-center justify-center w-screen h-screen bg-gray-800">
+			<form
+				class="flex flex-col items-center justify-center p-10 bg-gray-200 rounded shadow-md"
+				on:submit|preventDefault
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="w-20 h-20 mb-2 text-gray-600"
+					viewbox="0 0 20 20"
+					fill="currentColor"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+				<p class="mb-5 text-3xl text-gray-600 uppercase">Choose A Team</p>
+				<input
+					type="text"
+					name="team"
+					bind:value={team}
+					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500"
+					autocomplete="off"
+					placeholder="Team"
+				/>
+				<button
+					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
+					id="team"
+					type="submit"
+					disabled={thinking}
+					on:click={() => execChooseATeam(team)}
+					><span>Enter</span>
+				</button>
+				<br />
+			</form>
+		</div>
+	{:else}
+		<div class="flex items-center justify-center w-screen h-screen bg-gray-800">
+			<form
+				class="flex flex-col items-center justify-center p-10 bg-gray-200 rounded shadow-md"
+				on:submit|preventDefault
+			>
+				<p class="mb-5 text-3xl text-gray-600 uppercase">How many notes?</p>
+				{#if showNotes[0]}
+					<span class="p-2 text-gray-500 text-2xl">
+						{showNotes[0].notes !== 9999 ? '1st: ' + showNotes[0].team : ''}
+					</span>
+					<span class="p-2 font-bold text-gray-500 text-2xl">
+						{showNotes[0].notes !== 9999 ? showNotes[0].notes + ' notes' : ''}
+					</span>
+				{/if}
+				{#if showNotes[1]}
+					<br />
+					<span class="p-2 text-gray-500 text-xl">
+						{showNotes[1].notes !== 9999 ? '2nd: ' + showNotes[1].team + ' ->' : ''}
+						{showNotes[1].notes !== 9999 ? showNotes[1].notes + ' notes' : ''}
+					</span>
+				{/if}
+				{#if showNotes[2]}
+					<span class="p-2 text-gray-500 text-lg">
+						{showNotes[2].notes !== 9999 ? '3rd: ' + showNotes[1].team + ' ->' : ''}
+						{showNotes[2].notes !== 9999 ? showNotes[1].notes + ' notes' : ''}
+					</span>
+				{/if}
+				<input
+					type="text"
+					name="notes"
+					bind:value={notes}
+					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500"
+					disabled={thinking}
+					placeholder="Notes"
+					autocomplete="off"
+				/>
+				<button
+					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80"
+					id="JTMSubmit"
+					type="submit"
+					disabled={thinking}
+					on:click={() => execHandleNotes(team, 0, notes)}
+					><span>Submit!</span>
+				</button>
+				<button
+					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80"
+					id="minusStep"
+					type="button"
+					disabled={thinking}
+					on:click={() => execHandleNotes(team, 1, 9999)}
+					><span>-1</span>
+				</button>
+				<br />
+			</form>
+		</div>
+	{/if}
+</main>
+
+<style>
+	:root {
+		--toastContainerBottom: 1rem;
+		--toastContainerTop: auto;
+		--toastContainerRight: 1.6rem;
+	}
+
+	@media (orientation: landscape) {
+		:root {
+			--toastContainerBottom: 1rem;
+			--toastContainerTop: auto;
+			--toastContainerRight: 1.6rem;
+		}
+	}
+</style>
