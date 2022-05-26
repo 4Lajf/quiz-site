@@ -12,7 +12,7 @@
 	onMount(async () => {
 		const mySubscription = supabase
 			.from('quiz')
-			.on('INSERT', async (payload) => {
+			.on('UPDATE', async (payload) => {
 				twoButtons('Nowa odpowiedź!', 'Czy chciałbyś odświeżyć?', 'reload', 'Tak', 'Nie');
 			})
 			.subscribe();

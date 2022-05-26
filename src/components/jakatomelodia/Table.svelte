@@ -48,7 +48,7 @@
 			width: '98%'
 		},
 		{
-			id: 'notes',
+			id: 'nutek',
 			name: 'Nutki',
 			width: '10%'
 		},
@@ -65,14 +65,13 @@
 
 	const fetchData = async () => {
 		await loadQuizScores();
-		console.log(scores)
 		if (scores.length === 0) {
 			data = ['', '', '', ''];
 			return data;
 		}
 		data = [];
 		for (let i = 0; i < scores.length; i++) {
-			data[i] = [scores[i].team, scores[i].notes ? scores[i].notes : ``, scores[i].points];
+			data[i] = [scores[i].team, scores[i].nutek ? scores[i].nutek : ``, scores[i].points];
 		}
 		return data;
 	};
@@ -93,7 +92,6 @@
 		return teams;
 	};
 
-	const test2 = async () => {};
 </script>
 
 <main>

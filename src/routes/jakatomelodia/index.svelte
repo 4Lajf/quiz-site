@@ -21,7 +21,7 @@
 
 	const execChooseATeam = async (team) => {
 		if (!team) {
-			failure('Please enter the team name', 5000);
+			failure('Podaj nazwę drużyny', 5000);
 			thinking = false;
 			return;
 		}
@@ -76,14 +76,14 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				<p class="mb-5 text-3xl text-gray-600 uppercase">Choose A Team</p>
+				<p class="mb-5 text-3xl text-gray-600 uppercase">Podaj nazwę drużyny</p>
 				<input
 					type="text"
 					name="team"
 					bind:value={team}
 					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500"
 					autocomplete="off"
-					placeholder="Team"
+					placeholder="Drużyna"
 				/>
 				<button
 					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
@@ -91,7 +91,7 @@
 					type="submit"
 					disabled={thinking}
 					on:click={() => execChooseATeam(team)}
-					><span>Enter</span>
+					><span>Dalej</span>
 				</button>
 				<br />
 			</form>
@@ -102,26 +102,26 @@
 				class="flex flex-col items-center justify-center p-10 bg-gray-200 rounded shadow-md"
 				on:submit|preventDefault
 			>
-				<p class="mb-5 text-3xl text-gray-600 uppercase">How many notes?</p>
+				<p class="mb-5 text-3xl text-gray-600 uppercase">Po ilu nutkach?</p>
 				{#if showNotes[0]}
 					<span class="p-2 text-gray-500 text-2xl">
-						{showNotes[0].notes !== 9999 ? '1st: ' + showNotes[0].team : ''}
+						{showNotes[0].notes !== 9999 ? '1.: ' + showNotes[0].team : ''}
 					</span>
 					<span class="p-2 font-bold text-gray-500 text-2xl">
-						{showNotes[0].notes !== 9999 ? showNotes[0].notes + ' notes' : ''}
+						{showNotes[0].notes !== 9999 ? showNotes[0].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				{#if showNotes[1]}
 					<br />
 					<span class="p-2 text-gray-500 text-xl">
-						{showNotes[1].notes !== 9999 ? '2nd: ' + showNotes[1].team + ' ->' : ''}
-						{showNotes[1].notes !== 9999 ? showNotes[1].notes + ' notes' : ''}
+						{showNotes[1].notes !== 9999 ? '2.: ' + showNotes[1].team + ' ->' : ''}
+						{showNotes[1].notes !== 9999 ? showNotes[1].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				{#if showNotes[2]}
 					<span class="p-2 text-gray-500 text-lg">
-						{showNotes[2].notes !== 9999 ? '3rd: ' + showNotes[1].team + ' ->' : ''}
-						{showNotes[2].notes !== 9999 ? showNotes[1].notes + ' notes' : ''}
+						{showNotes[2].notes !== 9999 ? '3.: ' + showNotes[1].team + ' ->' : ''}
+						{showNotes[2].notes !== 9999 ? showNotes[1].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				<input
@@ -139,7 +139,7 @@
 					type="submit"
 					disabled={thinking}
 					on:click={() => execHandleNotes(team, 0, notes)}
-					><span>Submit!</span>
+					><span>Wyślij!</span>
 				</button>
 				<button
 					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80"

@@ -10,7 +10,7 @@
 
 	const execChooseATeam = async (team) => {
 		if (!team) {
-			failure('Please enter the team name', 5000);
+			failure('Wprowadź nazwę drużyny', 5000);
 			thinking = false;
 			return;
 		}
@@ -63,7 +63,7 @@
 					bind:value={team}
 					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500"
 					autocomplete="off"
-					placeholder="Team"
+					placeholder="Drużyna"
 				/>
 				<button
 					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
@@ -71,7 +71,7 @@
 					type="submit"
 					disabled={thinking}
 					on:click={() => execChooseATeam(team)}
-					><span>Enter</span>
+					><span>Dalej</span>
 				</button>
 				<br />
 			</form>
@@ -101,7 +101,7 @@
 					bind:value={answer}
 					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500 disabled:bg-gray-500"
 					autocomplete="off"
-					placeholder="Answer"
+					placeholder="Odpowiedź"
 					disabled={thinking}
 				/>
 				<input
@@ -110,7 +110,7 @@
 					bind:value={misc}
 					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500 disabled:bg-gray-500"
 					autocomplete="off"
-					placeholder="Additional Data"
+					placeholder="Inne Dane"
 					disabled={thinking}
 				/>
 				<button
@@ -119,7 +119,7 @@
 					type="submit"
 					disabled={thinking}
 					on:click={() => execAnswerQuestion(team, answer, misc)}
-					><span>Send</span>
+					><span>Wyślij!</span>
 				</button>
 				<br />
 			</form>

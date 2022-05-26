@@ -19,7 +19,7 @@
 			.from('JTM')
 			.update([{ points: fetchPoints }])
 			.eq('id', id);
-		console.log(pointsColor);
+		//console.log(pointsColor);
 		return fetchPoints;
 	};
 	console.log(pointsColor);

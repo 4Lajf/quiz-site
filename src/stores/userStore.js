@@ -1,5 +1,5 @@
 import { sleep } from './generalStore';
-import { success, failure, loading, failure } from './buttonStore';
+import { success, failure, loading } from './buttonStore';
 import { toast } from '@zerodevx/svelte-toast';
 import { supabase } from '../supabase.js';
 const user = supabase.auth.user()

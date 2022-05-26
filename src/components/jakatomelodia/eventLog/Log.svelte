@@ -12,7 +12,7 @@
 	onMount(async () => {
 		const mySubscription = supabase
 			.from('JTM')
-			.on('INSERT', async (payload) => {
+			.on('UPDATE', async (payload) => {
 				twoButtons('Nowa odpowiedź!', 'Czy chciałbyś odświeżyć?', 'reload', 'Tak', 'Nie');
 			})
 			.subscribe();
