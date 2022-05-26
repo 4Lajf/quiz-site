@@ -13,8 +13,8 @@
 	"devDependencies": {
 		"@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-netlify": "^1.0.0-next.51",
-		"@sveltejs/kit": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.62",
+		"@sveltejs/kit": "^1.0.0-next.345",
 		"@zerodevx/svelte-toast": "^0.7.1",
 		"autoprefixer": "^10.4.2",
 		"concurrently": "^7.0.0",
