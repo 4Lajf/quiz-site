@@ -2,55 +2,13 @@
   package = "netlify-plugin-js-obfuscator"
   
   [plugins.inputs]
-	compact = true
-    controlFlowFlattening = false
-    controlFlowFlatteningThreshold = 0
-    deadCodeInjection = false
-    deadCodeInjectionThreshold = 0
-    debugProtection = true
-    debugProtectionInterval = 3000
-    disableConsoleOutput = true
-    domainLock = ['.4lajf.com']
-    domainLockRedirectUrl = 'about =blank'
-    forceTransformStrings = []
-    identifierNamesGenerator = 'hexadecimal'
-    identifiersDictionary = []
-    identifiersPrefix = ''
-    ignoreImports = false
-    inputFileName = ''
-    log = false
-    numbersToExpressions = true
-    optionsPreset = 'default'
-    renameGlobals = false
-    renameProperties = false
-    renamePropertiesMode = 'safe'
-    reservedNames = []
-    reservedStrings = []
-    seed = 0
-    selfDefending = true
-    simplify = true
-    sourceMap = false
-    sourceMapBaseUrl = ''
-    sourceMapFileName = ''
-    sourceMapMode = 'separate'
-    sourceMapSourcesMode = 'sources-content'
-    splitStrings = true
-    splitStringsChunkLength = 10
-    stringArray = true
-    stringArrayCallsTransform = true
-    stringArrayCallsTransformThreshold = 1
-    stringArrayEncoding = []
-    stringArrayIndexesType = [
-        'hexadecimal-number'
-    ]
-    stringArrayIndexShift = true
-    stringArrayRotate = true
-    stringArrayShuffle = true
-    stringArrayWrappersCount = 1
-    stringArrayWrappersChainedCalls = true
-    stringArrayWrappersParametersMaxCount = 2
-    stringArrayWrappersType = 'variable'
-    stringArrayThreshold = 1
-    target = 'browser'
-    transformObjectKeys = true
-    unicodeEscapeSequence = false
+   # Compact code output on one line.
+     compact = true
+   # Enables numbers conversion to expressions
+     numbersToExpressions = true
+   # Enables additional code obfuscation through simplification.
+     simplify = true
+   # Randomly shuffles the stringArray array items
+     shuffleStringArray = true
+   # Splits literal strings into chunks with length of splitStringsChunkLength option value
+     splitStrings = true
