@@ -30,7 +30,6 @@
 			const mySubscription = supabase
 				.from('JTM')
 				.on('UPDATE', (payload) => {
-/* 					console.log('Change received!', payload); */
 					execRenderNotes();
 				})
 				.subscribe();
@@ -49,6 +48,7 @@
 			thinking = true;
 			await handleNotes(team, mode, notes);
 			showNotes = await renderNotes();
+			console.log(showNotes)
 			notes = '';
 		} finally {
 			thinking = false;
@@ -105,7 +105,7 @@
 				<p class="mb-5 text-3xl text-gray-600 uppercase">Po ilu nutkach?</p>
 				{#if showNotes[0]}
 					<span class="p-2 text-gray-500 text-2xl">
-						{showNotes[0].notes !== 9999 ? '1.: ' + showNotes[0].team : ''}
+						{showNotes[0].notes !== 9999 ? '1: ' + showNotes[0].team : ''}
 					</span>
 					<span class="p-2 font-bold text-gray-500 text-2xl">
 						{showNotes[0].notes !== 9999 ? showNotes[0].notes + ' nutek' : ''}
@@ -114,14 +114,14 @@
 				{#if showNotes[1]}
 					<br />
 					<span class="p-2 text-gray-500 text-xl">
-						{showNotes[1].notes !== 9999 ? '2.: ' + showNotes[1].team + ' ->' : ''}
+						{showNotes[1].notes !== 9999 ? '2: ' + showNotes[1].team + ' ->' : ''}
 						{showNotes[1].notes !== 9999 ? showNotes[1].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				{#if showNotes[2]}
 					<span class="p-2 text-gray-500 text-lg">
-						{showNotes[2].notes !== 9999 ? '3.: ' + showNotes[1].team + ' ->' : ''}
-						{showNotes[2].notes !== 9999 ? showNotes[1].notes + ' nutek' : ''}
+						{showNotes[2].notes !== 9999 ? '3: ' + showNotes[2].team + ' ->' : ''}
+						{showNotes[2].notes !== 9999 ? showNotes[2].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				<input

@@ -1,14 +1,10 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { user } from '../stores/authStore.js';
-	import Navbar from '../components/Navbar.svelte';
 	import Login from '../components/Login.svelte';
 </script>
 
 <main>
-	<nav>
-		<Navbar />
-	</nav>
 	<section
 		class="flex flex-col justify-center w-full h-screen m-0 text-gray-100 bg-gray-800 homescreen "
 	>

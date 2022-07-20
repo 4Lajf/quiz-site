@@ -49,26 +49,22 @@ export const handleNotes = async (team, mode, notes) => {
             noteFetchArr.push(noteFetch[i].notes);
         }
         noteFetchArr = noteFetchArr.sort();
-        if (noteFetchArr[0] === 1) {
-            await sleep(500);
-            failure('Ta runda została zakończona', 5000);
-            return;
-        }
 
         if (mode === 1) {
             notes = noteFetchArr[0] - 1;
             //(notes, noteFetchArr[0] - 1)
         }
 
-        if (notes > noteFetchArr[0] - 1) {
+        if (noteFetchArr[0] === 1 && noteFetchArr[1] === 1 && noteFetchArr[2] === 1) {
             await sleep(500);
-            failure('Podaj liczbę mniejszą niż ' + noteFetchArr[0], 5000);
+            failure('Ta runda została zakończona');
             return;
         }
+        
         loading('Wysyłanie odpowiedzi...');
         const { data: dbdata, error: dberror } = await supabase
             .from('JTM')
-            .update([{ notes: notes }])
+            .update([{ notes: notes, date: Date.now() }])
             .eq('team', team);
         renderNotes();
         await sleep(500);
@@ -83,11 +79,19 @@ export const handleNotes = async (team, mode, notes) => {
 
 export const renderNotes = async () => {
     let showNotes = [];
-    let { data: initialData, error } = await supabase.from('JTM').select('notes, team');
+    let { data: initialData, error } = await supabase.from('JTM').select('notes, date, team');
     for (let i = 0; i < initialData.length; i++) {
-        showNotes.push({ team: initialData[i].team, notes: initialData[i].notes });
+        showNotes.push({ team: initialData[i].team, notes: initialData[i].notes, date: initialData[i].date });
     }
-    showNotes = showNotes.sort((a, b) => (a.notes > b.notes ? 1 : -1));
+
+    showNotes = showNotes.sort((a, b) => {
+        if (a.notes < b.notes) return -1;
+        if (a.notes > b.notes) return 1;
+
+        if (a.date > b.date) return 1;
+        if (a.date < b.date) return -1;
+
+    });
     return showNotes;
 };
 
