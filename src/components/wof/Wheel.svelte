@@ -8,10 +8,10 @@
 	const TWO_PI = Math.PI * 2;
 	const HALF_PI = Math.PI * 0.5;
 	// canvas settings
-	var viewWidth = 768,
-		viewHeight = 768,
-		viewCenterX = viewWidth * 0.5,
-		viewCenterY = viewHeight * 0.5,
+	var viewWidth = 1536,
+		viewHeight = 1536,
+		viewCenterX = viewWidth * 1,
+		viewCenterY = viewHeight * 1,
 		drawingCanvas,
 		ctx,
 		timeStep = 1 / 60;
@@ -103,16 +103,16 @@
 		});
 		world.addContactMaterial(contactMaterial);
 
-		var wheelRadius = 8,
+		var wheelRadius = 16,
 			wheelX = physicsCenterX,
 			wheelY = wheelRadius + 4,
 			arrowX = wheelX,
-			arrowY = wheelY + wheelRadius + 0.625;
+			arrowY = wheelY + wheelRadius + 1.25;
 
-		wheel = new Wheel(wheelX, wheelY, wheelRadius, 32, 0.25, 7.5);
+		wheel = new Wheel(wheelX, wheelY, wheelRadius, 32, 0.25, 16);
 		wheel.body.angle = Math.PI / 32.5;
 		wheel.body.angularVelocity = 0;
-		arrow = new Arrow(arrowX, arrowY, 0.5, 1.5);
+		arrow = new Arrow(arrowX, arrowY, 1, 3);
 		mouseBody = new p2.Body();
 
 		world.addBody(mouseBody);
@@ -335,8 +335,8 @@
 				ctx.fill();
 			}, this);
 
-			let labelX = -150,
-				labelY = 50,
+			let labelX = -300,
+				labelY = 100,
 				labelRotation = (46 * Math.PI) / 180,
 				labelTranslateX = 0,
 				labelTranslateY = 0;
@@ -348,7 +348,7 @@
 
 				ctx.translate(labelTranslateX, labelTranslateY);
 				ctx.rotate(labelRotation);
-				ctx.font = '18px verdana';
+				ctx.font = '30px verdana';
 				if (i === 29 || i === 13) {
 					ctx.fillStyle = 'white';
 				} else {
@@ -470,11 +470,13 @@
 		referrerpolicy="no-referrer"></script>
 </svelte:head>
 
-<main class="bg-zinc-500">
-	<div class="opacity-0">Count: {reward}</div>
-	<div id="container" class="centered">
-		<canvas id="drawing_canvas" bind:this={drawingCanvas} />
-		<div id="status_label">{statusLabel}</div>
+<main>
+	<div class="container z-50 !bg-zinc-400">
+		<div class="opacity-0">Count: {reward}</div>
+		<div id="container" class="centered">
+			<canvas id="drawing_canvas" bind:this={drawingCanvas} />
+			<div id="status_label">{statusLabel}</div>
+		</div>
 	</div>
 </main>
 
@@ -482,24 +484,23 @@
 	.centered {
 		position: absolute;
 		margin: auto;
-		top: 0;
+		top: -33%;
 		bottom: 0;
 		left: 0;
 		right: 0;
 	}
 
 	#container {
-		width: 768px;
-		height: 768px;
+		width: 1536px;
+		height: 1536px;
 	}
 
 	#status_label {
-		position: absolute;
-		top: 768px;
-		width: 768px;
+		position: relative;
+		top: 415px;
 		color: black;
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 1.5em;
+		font-size: 2em;
 		text-align: center;
 		pointer-events: none;
 	}

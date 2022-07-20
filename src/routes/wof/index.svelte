@@ -3,7 +3,7 @@
 	import Guess from '../../components/wof/Guess.svelte';
 </script>
 
-<main class="bg-zinc-500">
+<main class="bg-zinc-400">
 	<Wheel />
 	<Guess />
 </main>
