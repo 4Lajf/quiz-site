@@ -618,6 +618,36 @@ video {
 .bottom-\[30vh\] {
   bottom: 30vh;
 }
+.top-\[20vh\] {
+  top: 20vh;
+}
+.top-\[30vh\] {
+  top: 30vh;
+}
+.top-\[100vh\] {
+  top: 100vh;
+}
+.top-96 {
+  top: 24rem;
+}
+.bottom-96 {
+  bottom: 24rem;
+}
+.top-\[10vh\] {
+  top: 10vh;
+}
+.bottom-\[35vh\] {
+  bottom: 35vh;
+}
+.bottom-\[15vh\] {
+  bottom: 15vh;
+}
+.bottom-\[5vh\] {
+  bottom: 5vh;
+}
+.bottom-\[22vh\] {
+  bottom: 22vh;
+}
 .z-50 {
   z-index: 50;
 }

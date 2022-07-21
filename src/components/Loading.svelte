@@ -4,7 +4,7 @@
 
 <main>
 	<div
-		class="inset-0 bg-gray-800 fixed flex w-full h-full items-center justify-center duration-300 transition-opacity"
+		class="fixed inset-0 flex items-center justify-center w-full h-full transition-opacity duration-300 bg-gray-800"
 		style="z-index: 6000"
 		transition:fade
 	>
@@ -43,7 +43,7 @@
 					/>
 				</svg>
 			</x-loading>
-			<div class="mt-3 text-gray-200 font-mono text-sm sm:text-xs">Loading...</div>
+			<div class="mt-3 font-mono text-sm text-gray-200 sm:text-xs">Loading...</div>
 		</div>
 	</div>
 </main>

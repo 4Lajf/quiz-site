@@ -106,7 +106,7 @@
 	<style global>
 		@import 'https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css';
 	</style>
-	<div class="pt-10 flex items-center justify-center">
+	<div class="flex items-center justify-center pt-10">
 		<ManagePoints points="1" {teams} />
 		<ManagePoints points="2" {teams} />
 		<ManagePoints points="3" {teams} />
@@ -115,10 +115,10 @@
 		<ManagePoints points="-3" {teams} />
 		<ManagePoints points="0" {teams} />
 	</div>
-	<div class="pt-10 flex items-center justify-center">
+	<div class="flex items-center justify-center pt-10">
 		<NewRound />
 	</div>
-	<div class="pt-10 flex items-center justify-center">
+	<div class="flex items-center justify-center pt-10">
 		<DisableAnswers />
 		<EnableAnswers />
 	</div>

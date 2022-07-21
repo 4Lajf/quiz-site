@@ -19,11 +19,11 @@
 	<div
 		transition:fly
 		id="toast-success"
-		class="flex items-center w-full max-w-xs p-4 mb-4 rounded-lg shadow text-white bg-green-700"
+		class="flex items-center w-full max-w-xs p-4 mb-4 text-white bg-green-700 rounded-lg shadow"
 		role="alert"
 	>
 		<div
-			class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-900 text-white"
+			class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-white bg-green-900 rounded-lg"
 		>
 			<svg
 				class="w-5 h-5"

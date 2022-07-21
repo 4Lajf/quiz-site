@@ -12,7 +12,8 @@
 	onMount(async () => {
 		const mySubscription = supabase
 			.from('JTM')
-			.on('UPDATE', async (payload) => {
+			.
+			('UPDATE', async (payload) => {
 				twoButtons('Nowa odpowiedź!', 'Czy chciałbyś odświeżyć?', 'reload', 'Tak', 'Nie');
 			})
 			.subscribe();
@@ -70,7 +71,7 @@
 				<table>
 					<tbody class="bg-white">
 						{#each Object.values(eventData) as row}
-							<tr class="whitespace-nowrap border-2 border-gray-700">
+							<tr class="border-2 border-gray-700 whitespace-nowrap">
 								{#each Object.values(row) as cell}
 									{#await execColor() then color}
 										<td class="px-3 py-2 bg-{color} w-[30vw]">

@@ -15,7 +15,17 @@
 	let leaderboardEntries;
 	let reward = '';
 
-	leaderboardEntries = get(leaderboardData);
+	function compare(a, b) {
+		if (a.score > b.score) {
+			return -1;
+		}
+		if (a.score < b.score) {
+			return 1;
+		}
+		return 0;
+	}
+
+	leaderboardEntries = get(leaderboardData).sort(compare).slice(0, 10);
 
 	onMount(() => {
 		letters.innerHTML = answerArray.join(' ');
@@ -26,14 +36,11 @@
 
 	// these are our words
 	let quizData = [
-		{ name: 'DATE A LIVE', category: 'anime' }
-		/* 		{ name: 'ASDASDAS', category: 'anime' },
-		{ name: '12E312412', category: 'anime' },
-		{ name: 'JIPKMPKMK', category: 'anime' } */
+		{ name: 'Date a Live', category: 'anime' }
 	];
 
 	// picks a word at random
-	let word = quizData[Math.floor(Math.random() * quizData.length)].name;
+	let word = quizData[Math.floor(Math.random() * quizData.length)].name.toUpperCase();
 	let category = quizData[Math.floor(Math.random() * quizData.length)].category;
 
 	// give me a list of empty letters for the word
@@ -59,7 +66,6 @@
 	let answer;
 
 	const submission = (guess) => {
-		console.log(guessesCount);
 		if (guess.length !== 1) {
 			alert('Please enter a single letter');
 		} else {
@@ -76,14 +82,8 @@
 				}
 			}
 		}
-
-		if (guessesCount === 4) {
-			consonantsDisabled = true;
-			vowelsDisabled = false;
-		} else if (guessesCount === 5) {
-			consonantsDisabled = true;
-			vowelsDisabled = true;
-		}
+		consonantsDisabled = true;
+		vowelsDisabled = true;
 		guessesCount++;
 	};
 
@@ -200,8 +200,17 @@
 			wheel.gotLucky();
 			wheelStopped = true;
 			wheelSpinning = false;
-			consonantsDisabled = tmpCD;
-			vowelsDisabled = tmpVD;
+
+			if (guessesCount === 4) {
+				consonantsDisabled = true;
+				vowelsDisabled = false;
+			} else if (guessesCount === 5) {
+				consonantsDisabled = true;
+				vowelsDisabled = true;
+			} else {
+				consonantsDisabled = false;
+				vowelsDisabled = true;
+			}
 
 			wheel.body.angularVelocity = 0;
 		}
@@ -533,16 +542,16 @@
 <Keystroke
 	on:combo={({ detail }) => {
 		switch (detail) {
-			case 'Alt+a':
+			case 'Alt+z':
 				score = 0;
 				break;
-			case 'Alt+s':
+			case 'Alt+x':
 				for (let j = 0; j < word.length; j++) {
 					answerArray[j] = word[j];
 					letters.innerHTML = answerArray.join(' ');
 				}
 				break;
-			case 'Alt+d':
+			case 'Alt+c':
 				letters.innerHTML = answerArray.join(' ');
 				// picks a word at random
 				word = quizData[Math.floor(Math.random() * quizData.length)].name;
@@ -574,7 +583,7 @@
 				score = 0;
 				letters.innerHTML = answerArray.join(' ');
 				break;
-			case 'Alt+f':
+			case 'Alt+v':
 				let name = prompt('Wprowadź nick');
 				if (name) {
 					leaderboardEntries = get(leaderboardData);
@@ -593,198 +602,197 @@
 	<section id="sidebar" class="select-none">
 		<div class="inner">
 			<nav>
-				<ul>
+				<ul class="relative bottom-[22vh]">
 					<li><a href="#two">Tablica Wyników:</a></li>
 					{#each leaderboardEntries as { score, name }, i}
-						<li><a href="#three">{name}: {score}</a></li>
+						<a href="#three">{name}: {score}</a>
 					{/each}
-					<a href="#two">Wynik 1:</a>
-					<a href="#two">Wynik 2:</a>
-					<a href="#two">Wynik 3:</a>
 				</ul>
-				<button
-					type="button"
-					on:click={() => submission('A')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>A</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('B')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>B</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('C')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>C</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('D')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>D</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('E')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>E</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('F')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>F</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('G')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>G</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('H')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>H</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('I')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>I</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('J')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>J</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('K')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>K</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('L')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>L</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('M')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>M</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('N')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>N</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('O')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>O</button
-				>
+				<div class="absolute bottom-[5vh]">
+					<button
+						type="button"
+						on:click={() => submission('A')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>A</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('B')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>B</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('C')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>C</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('D')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>D</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('E')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>E</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('F')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>F</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('G')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>G</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('H')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>H</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('I')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>I</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('J')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>J</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('K')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>K</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('L')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>L</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('M')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>M</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('N')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>N</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('O')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>O</button
+					>
 
-				<button
-					type="button"
-					on:click={() => submission('P')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>P</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('Q')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>Q</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('R')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>R</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('S')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>S</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('T')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>T</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('U')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>U</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('V')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>V</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('W')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>W</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('X')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>X</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('Y')}
-					disabled={vowelsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
-					>Y</button
-				>
-				<button
-					type="button"
-					on:click={() => submission('Z')}
-					disabled={consonantsDisabled}
-					class="relative disabled:opacity-70 rounded-full inline-block w-14 h-14 text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
-					>Z</button
-				>
+					<button
+						type="button"
+						on:click={() => submission('P')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>P</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('Q')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>Q</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('R')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>R</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('S')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>S</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('T')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>T</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('U')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>U</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('V')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>V</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('W')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>W</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('X')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>X</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('Y')}
+						disabled={vowelsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
+						>Y</button
+					>
+					<button
+						type="button"
+						on:click={() => submission('Z')}
+						disabled={consonantsDisabled}
+						class="text-4xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded-full shadow-md disabled:opacity-70 w-14 h-14 disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
+						>Z</button
+					>
+				</div>
 			</nav>
 		</div>
 	</section>
@@ -826,7 +834,7 @@
 		margin: auto;
 		top: 0;
 		bottom: 0;
-		left: 22%;
+		left: 23%;
 		right: 0;
 	}
 

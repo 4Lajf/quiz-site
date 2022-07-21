@@ -83,7 +83,7 @@
 			</svg>
 			<p class="mb-5 text-3xl text-gray-600 uppercase">Login</p>
 			{#if invalidCredentials === 1}
-				<label for="email" class="text-sm leading-4 mb-1 w-full m-0 text-red-500 font-bold"
+				<label for="email" class="w-full m-0 mb-1 text-sm font-bold leading-4 text-red-500"
 					>Invalid email or password</label
 				>
 			{/if}

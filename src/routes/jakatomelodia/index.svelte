@@ -104,22 +104,22 @@
 			>
 				<p class="mb-5 text-3xl text-gray-600 uppercase">Po ilu nutkach?</p>
 				{#if showNotes[0]}
-					<span class="p-2 text-gray-500 text-2xl">
+					<span class="p-2 text-2xl text-gray-500">
 						{showNotes[0].notes !== 9999 ? '1: ' + showNotes[0].team : ''}
 					</span>
-					<span class="p-2 font-bold text-gray-500 text-2xl">
+					<span class="p-2 text-2xl font-bold text-gray-500">
 						{showNotes[0].notes !== 9999 ? showNotes[0].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				{#if showNotes[1]}
 					<br />
-					<span class="p-2 text-gray-500 text-xl">
+					<span class="p-2 text-xl text-gray-500">
 						{showNotes[1].notes !== 9999 ? '2: ' + showNotes[1].team + ' ->' : ''}
 						{showNotes[1].notes !== 9999 ? showNotes[1].notes + ' nutek' : ''}
 					</span>
 				{/if}
 				{#if showNotes[2]}
-					<span class="p-2 text-gray-500 text-lg">
+					<span class="p-2 text-lg text-gray-500">
 						{showNotes[2].notes !== 9999 ? '3: ' + showNotes[2].team + ' ->' : ''}
 						{showNotes[2].notes !== 9999 ? showNotes[2].notes + ' nutek' : ''}
 					</span>
