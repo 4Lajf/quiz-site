@@ -81,7 +81,9 @@
 					answerArray[j] = guess;
 					letters.innerHTML = answerArray.join(' ');
 					remainingLetters--;
-					score += parseInt(counterElement.$$.ctx[0]);
+					if (typeof counterElement.$$.ctx[0] === 'number') {
+						score += parseInt(counterElement.$$.ctx[0]);
+					}
 				}
 			}
 		}
@@ -125,10 +127,10 @@
 	}}
 />
 
-<main class="bg-zinc-400">
+<main class="select-none bg-zinc-400">
 	<Counter bind:this={counterElement} />
-	<h1 class="text-center text-5xl">Kategoria: {category}</h1>
-	<h1 class="text-center text-3xl">Wynik: {score}</h1>
+	<h1 class="text-5xl text-center">Kategoria: {category}</h1>
+	<h1 class="text-3xl text-center">Wynik: {score}</h1>
 	<div id="letters" class="flex justify-center" bind:this={letters} />
 	<div class="text-3xl">
 		<p>Tablica Wyników:</p>
@@ -141,35 +143,35 @@
 			type="button"
 			on:click={() => submission('A')}
 			disabled={vowelsDisabled}
-			class=" disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>A</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('B')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>B</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('C')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>C</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('D')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>D</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('E')}
 			disabled={vowelsDisabled}
-			class="disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>E</button
 		>
 		<br />
@@ -177,70 +179,70 @@
 			type="button"
 			on:click={() => submission('F')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>F</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('G')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>G</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('H')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>H</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('I')}
 			disabled={vowelsDisabled}
-			class="disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>I</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('J')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>J</button
 		><br />
 		<button
 			type="button"
 			on:click={() => submission('K')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>K</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('L')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>L</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('M')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>M</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('N')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>N</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('O')}
 			disabled={vowelsDisabled}
-			class="disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>O</button
 		>
 		<br />
@@ -248,77 +250,77 @@
 			type="button"
 			on:click={() => submission('P')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>P</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('Q')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>Q</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('R')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>R</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('S')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>S</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('T')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>T</button
 		><br />
 		<button
 			type="button"
 			on:click={() => submission('U')}
 			disabled={vowelsDisabled}
-			class="disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>U</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('V')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>V</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('W')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>W</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('X')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>X</button
 		>
 		<button
 			type="button"
 			on:click={() => submission('Y')}
 			disabled={vowelsDisabled}
-			class="disabled:bg-red-800 disabled:text-gray-300 inline-block w-20 h-20 bg-red-600 text-white font-medium text-5xl leading-tight uppercase  shadow-md hover:bg-red-700 hover:shadow-lg  transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-red-600 shadow-md disabled:bg-red-800 disabled:text-gray-300 hover:bg-red-700 hover:shadow-lg"
 			>Y</button
 		><br />
 		<button
 			type="button"
 			on:click={() => submission('Z')}
 			disabled={consonantsDisabled}
-			class="disabled:bg-blue-800 disabled:text-gray-300 inline-block w-20 h-20 bg-blue-600 text-white font-medium text-5xl leading-tight uppercase shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-150 ease-in-out"
+			class="inline-block w-20 h-20 text-5xl font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-blue-600 shadow-md disabled:bg-blue-800 disabled:text-gray-300 hover:bg-blue-700 hover:shadow-lg"
 			>Z</button
 		>
 	</div>
