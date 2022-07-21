@@ -76,7 +76,7 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				<p class="mb-5 text-3xl text-gray-600 uppercase">Podaj nazwę drużyny</p>
+				<p class="mb-5 text-3xl text-gray-600 uppercase">Nazwa Drużyny</p>
 				<input
 					type="text"
 					name="team"
@@ -141,15 +141,6 @@
 					on:click={() => execHandleNotes(team, 0, notes)}
 					><span>Wyślij!</span>
 				</button>
-				<button
-					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80"
-					id="minusStep"
-					type="button"
-					disabled={thinking}
-					on:click={() => execHandleNotes(team, 1, 9999)}
-					><span>-1</span>
-				</button>
-				<br />
 			</form>
 		</div>
 	{/if}

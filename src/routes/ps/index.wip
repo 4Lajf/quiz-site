@@ -1,12 +1,40 @@
 <script>
+	import { supabase } from '../../supabase';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 	import { failure } from '../../stores/buttonStore';
-	import { answerQuestion, chooseATeam } from '../../stores/quizStore';
+	import { answerQuestion, chooseATeam, takeover, renderTurn } from '../../stores/psStore';
 	let thinking = false;
 	let team = null,
 		answer = null,
 		status = 0,
-		misc = null;
+		misc = null,
+		showTurn,
+		whoseTurn,
+		whoseTurnIndex,
+		myTurnIndex,
+		turnsLeft;
+
+	$: turnsLeft = '';
+
+	const execRenderTurn = async () => {
+		showTurn = await renderTurn();
+
+		whoseTurnIndex = showTurn.findIndex((e) => e.isTurn === 'X');
+		if (whoseTurnIndex !== -1) {
+			whoseTurn = showTurn[whoseTurnIndex];
+		}
+
+		myTurnIndex = showTurn.findIndex((e) => e.team === team);
+
+		if (myTurnIndex !== -1) {
+			if (myTurnIndex < whoseTurnIndex) {
+				turnsLeft = showTurn.length - whoseTurnIndex;
+			} else {
+				turnsLeft = Math.abs(whoseTurnIndex - myTurnIndex);
+			}
+		}
+		console.log(myTurnIndex, whoseTurnIndex);
+	};
 
 	const execChooseATeam = async (team) => {
 		if (!team) {
@@ -16,9 +44,26 @@
 		}
 
 		try {
+			const mySubscription = supabase
+				.from('ps')
+				.on('UPDATE', (payload) => {
+					execRenderTurn();
+				})
+				.subscribe();
+
 			thinking = true;
 			await chooseATeam(team);
+			await execRenderTurn();
 			status = 1;
+		} finally {
+			thinking = false;
+		}
+	};
+
+	const execTakeover = async (team) => {
+		try {
+			thinking = true;
+			await takeover(team);
 		} finally {
 			thinking = false;
 		}
@@ -28,10 +73,10 @@
 		try {
 			thinking = true;
 			await answerQuestion(team, answer, misc);
-			answer = '';
-			misc = '';
 		} finally {
 			thinking = false;
+			answer = '';
+			misc = '';
 		}
 	};
 </script>
@@ -95,6 +140,13 @@
 					/>
 				</svg>
 				<p class="mb-5 text-3xl text-gray-600 uppercase">{team}</p>
+				{#if turnsLeft === 0}
+					<p class="mb-5 text-xl text-gray-600 uppercase">Teraz Twoja kolej</p>
+				{:else}
+					<p class="mb-5 text-xl text-gray-600 uppercase">
+						Twoja kolej będzie za <b> {turnsLeft} kolejki</b>
+					</p>
+				{/if}
 				<input
 					type="text"
 					name="team"
@@ -120,6 +172,14 @@
 					disabled={thinking}
 					on:click={() => execAnswerQuestion(team, answer, misc)}
 					><span>Wyślij!</span>
+				</button>
+				<button
+					class="p-2 font-bold text-white bg-red-500 rounded hover:bg-red-600 w-80 disabled:bg-gray-500"
+					id="login"
+					type="submit"
+					disabled={thinking}
+					on:click={() => execTakeover(team)}
+					><span>Przejmij!</span>
 				</button>
 				<br />
 			</form>

@@ -10,7 +10,7 @@ export const chooseATeam = async (team) => {
         let { data: selectTeam, errorSelectTeam } = await supabase
             .from('quiz')
             .select('team')
-            .eq('team', team)
+            .ilike('team', `%${team}%`)
         if (selectTeam.length === 0) {
             const { data, error } = await supabase.from('quiz').insert([{ team: team }]);
         }
@@ -74,7 +74,7 @@ export const answerQuestion = async (team, answer, misc) => {
 export const loadQuizScores = async () => {
     const { data, error } = await supabase.from('quiz')
         .select('*')
-        .order('points', { ascending: false });
+        .order('id', { ascending: true });
     if (error) {
         return console.error(error);
     }

@@ -1,13 +1,13 @@
 <script>
 	import ManagePoints from './ManagePoints.svelte';
 	import NewRound from './NewRound.svelte';
+	import DeleteAnswer from './DeleteAnswer.svelte';
 	import DisableAnswers from './DisableAnswers.svelte';
 	import EnableAnswers from './EnableAnswers.svelte';
 	import Loading from '../../components/Loading.svelte';
-	import { quizScores, loadQuizScores } from '../../stores/JTMStore';
+	import { quizScores, loadQuizScores } from '../../stores/psStore';
 	import { RowSelection } from 'gridjs/plugins/selection';
 	import Grid from 'gridjs-svelte';
-	import RandomizeTeams from './RandomizeTeams.svelte';
 	let data,
 		filterData,
 		grid,
@@ -46,15 +46,40 @@
 		{
 			id: 'team',
 			name: 'Drużyna',
-			width: '98%'
+			width: '18%'
 		},
 		{
-			id: 'nutek',
-			name: 'Nutki',
-			width: '10%'
+			id: 'answer',
+			name: 'Odpowiedź',
+			width: '40%'
+		},
+		{
+			id: 'misc',
+			name: 'Inne',
+			width: '40%'
 		},
 		{
 			id: 'points',
+			name: '',
+			width: '1%'
+		},
+		{
+			id: 'isTurn',
+			name: '',
+			width: '1%'
+		},
+		{
+			id: 'seconds',
+			name: '',
+			width: '1%'
+		},
+		{
+			id: 'isTakeover',
+			name: '',
+			width: '1%'
+		},
+		{
+			id: 'takeoverDate',
 			name: '',
 			width: '1%'
 		}
@@ -67,12 +92,21 @@
 	const fetchData = async () => {
 		await loadQuizScores();
 		if (scores.length === 0) {
-			data = ['', '', '', ''];
+			data = ['', '', '', '', '', ''];
 			return data;
 		}
 		data = [];
 		for (let i = 0; i < scores.length; i++) {
-			data[i] = [scores[i].team, scores[i].nutek ? scores[i].nutek : ``, scores[i].points];
+			data[i] = [
+				scores[i].team,
+				scores[i].answer ? scores[i].answer : ``,
+				scores[i].misc ? scores[i].misc : ``,
+				scores[i].points,
+				scores[i].isTurn ? scores[i].isTurn : ``,
+				scores[i].seconds ? scores[i].seconds : ``,
+				scores[i].isTakeover ? scores[i].isTakeover : ``,
+				scores[i].takeoverDate ? scores[i].takeoverDate : ``
+			];
 		}
 		return data;
 	};
@@ -92,13 +126,15 @@
 		}
 		return teams;
 	};
+
+	const test2 = async () => {};
 </script>
 
 <main>
 	{#await runOnce()}
 		<Loading />
 	{:then}
-		<Grid {data} {columns} sort={true} pagination={false} width="60vw" bind:this={grid} />
+		<Grid {data} {columns} sort={true} pagination={false} width="70vw" bind:this={grid} />
 	{:catch error}
 		<p style="color: red">{error.message}</p>
 	{/await}
@@ -119,9 +155,9 @@
 		<NewRound />
 	</div>
 	<div class="flex items-center justify-center pt-10">
+		<DeleteAnswer {teams} />
 		<DisableAnswers />
 		<EnableAnswers />
-		<RandomizeTeams />
 	</div>
 </main>
 

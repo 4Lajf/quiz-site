@@ -1,4 +1,4 @@
-import { sleep } from './generalStore';
+import { refresh, sleep } from './generalStore';
 import { success, failure, loading } from './buttonStore';
 import { supabase } from '../supabase';
 import { toast } from '@zerodevx/svelte-toast';
@@ -10,7 +10,7 @@ export const chooseATeam = async (team) => {
         let { data: selectTeam, errorSelectTeam } = await supabase
             .from('JTM')
             .select('team')
-            .eq('team', team)
+            .ilike('team', `%${team}%`)
         //console.log(selectTeam)
         if (selectTeam.length === 0) {
             const { data, error } = await supabase.from('JTM').insert([{ team: team }]);
@@ -60,7 +60,7 @@ export const handleNotes = async (team, mode, notes) => {
             failure('Ta runda została zakończona');
             return;
         }
-        
+
         loading('Wysyłanie odpowiedzi...');
         const { data: dbdata, error: dberror } = await supabase
             .from('JTM')
@@ -98,7 +98,7 @@ export const renderNotes = async () => {
 export const loadQuizScores = async () => {
     const { data, error } = await supabase.from('JTM')
         .select('*')
-        .order('points', { ascending: false });
+        .order('id', { ascending: true });
     if (error) {
         return console.error(error);
     }
@@ -118,6 +118,35 @@ export const newRound = async () => {
         .from('JTMEvents')
         .insert([{ name: 'NewRound', event: `[${time}] ▂︎ ▃︎ ▄︎ ROZPOCZĘTO NOWĄ RUNDĘ ▄︎ ▃︎ ▂︎`, }]);
     window.location.reload();
+}
+
+export const randomizeTeams = async () => {
+
+    const { data: rtData, error: rtErr } = await supabase.from('JTM')
+        .select('*');
+    let teams = rtData;
+
+    for (let i = 0; i < 10; i++) {
+        const randomizeTeams = (array) => {
+            const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+            return shuffledArray
+        }
+        teams = randomizeTeams(teams)
+    }
+    const { data: delData, error: delErr } = await supabase
+        .from('JTM')
+        .delete()
+        .or('canAnswer.eq.true,canAnswer.eq.false')
+
+    for (let i = 0; i < teams.length; i++) {
+        console.log(teams[i])
+        const { data: insData, error: insErr } = await supabase
+            .from('JTM')
+            .insert([
+                { canAnswer: teams[i].canAnswer, date: teams[i].date, notes: teams[i].notes, points: teams[i].points, team: teams[i].team },
+            ])
+    }
+    refresh()
 }
 
 export const disableAnswers = async () => {

@@ -11,15 +11,15 @@
 
 	onMount(async () => {
 		const mySubscription = supabase
-			.from('JTM')
-			('UPDATE', async (payload) => {
+			.from('ps')
+			.on('UPDATE', async (payload) => {
 				twoButtons('Nowa odpowiedź!', 'Czy chciałbyś odświeżyć?', 'reload', 'Tak', 'Nie');
 			})
 			.subscribe();
 	});
 
 	const runOnce = async () => {
-		eventData = await renderEvents('JTMEvents');
+		eventData = await renderEvents('psEvents');
 
 		for (let i = 0; i < eventData.length; i++) {
 			let eventObject = Object.values(eventData)[i];
