@@ -826,7 +826,6 @@
 
 <Keystroke
 	on:combo={({ detail }) => {
-	console.log(detail);
 		switch (detail) {
 			case 'Alt+z':
 				score = 0;
