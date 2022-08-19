@@ -659,6 +659,7 @@
 			wheelStopped = true;
 			wheelSpinning = false;
 			isLetterChosen = false;
+			console.log(guuessCount)
 			if (guessesCount === 5) {
 				consonantsDisabled = true;
 				vowelsDisabled = false;
@@ -667,7 +668,7 @@
 				consonantsDisabled = true;
 				vowelsDisabled = true;
 			}
-			if (guessesCount < 4) {
+			if (guessesCount <= 4) {
 				consonantsDisabled = false;
 				vowelsDisabled = true;
 			}
