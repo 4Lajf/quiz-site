@@ -659,15 +659,15 @@
 			wheelStopped = true;
 			wheelSpinning = false;
 			isLetterChosen = false;
-			if (guessesCount === 6) {
+			if (guessesCount === 5) {
 				consonantsDisabled = true;
 				vowelsDisabled = false;
 			}
-			if (guessesCount === 7) {
+			if (guessesCount === 6) {
 				consonantsDisabled = true;
 				vowelsDisabled = true;
 			}
-			if (guessesCount < 5) {
+			if (guessesCount < 4) {
 				consonantsDisabled = false;
 				vowelsDisabled = true;
 			}
