@@ -515,8 +515,10 @@
 
 	let guess;
 	let answer;
+	let totalLetters
 
 	const submission = (guess) => {
+		console.log(guessesCount)
 		isLetterChosen = true;
 		clickedButtons.push(guess);
 		clickedButtons = clickedButtons;
@@ -529,7 +531,7 @@
 				if (word[j] === guess && guess !== answerArray[j]) {
 					answerArray[j] = guess;
 					letters.innerHTML = answerArray.join(' ');
-					if (typeof reward === 'number' && isNaN(reward) === false) {
+					if (typeof reward === 'number' && isNaN(reward) === false && guessesCount !== 0) {
 						score += parseInt(reward);
 					}
 					remainingLetters--;
@@ -1064,6 +1066,7 @@
 						letter === 'X' ||
 						letter === 'Z'
 				);
+				guessesCount = 0;
 				submission(wordWithoutVowels[Math.floor(Math.random() * wordWithoutVowels.length)]);
 				break;
 			case 'Alt+v':
