@@ -1076,7 +1076,7 @@
 					leaderboardData.set([...leaderboardEntries, { score: score, name: name }]);
 				}
 				break;
-			case 'Control+Alt+Shift+Delete':
+			case 'Alt+Delete':
 				leaderboardData.set([]);
 				break;
 		}
