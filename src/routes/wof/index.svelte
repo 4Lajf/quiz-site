@@ -1316,6 +1316,7 @@
 		<section id="intro" class="relative wrapper style1 fullscreen">
 			<div class="relative bottom-[20vh]">
 				<center>
+					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">DARMOWE ;), zakręć, zgadnij i wygraj mange lub Pocky :></h2>
 					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">Kategoria: {category}</h2>
 					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">Wynik: {score}</h2>
 					<!-- svelte-ignore a11y-missing-content -->
