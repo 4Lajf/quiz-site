@@ -1,7 +1,7 @@
 <script>
 	import { supabase } from '../../supabase';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
-	import { failure } from '../../stores/buttonStore';
+	import { failure, success, loading } from '../../stores/buttonStore';
 	import {
 		answerQuestion,
 		chooseATeam,
@@ -13,6 +13,7 @@
 	let thinking = false;
 	let team = null,
 		answer = null,
+		seconds = null,
 		status = 0,
 		misc = null,
 		showTurn,
@@ -32,7 +33,6 @@
 			.select('timeChosen')
 			.eq('team', team);
 		timeChosen = timeChosenData[0].timeChosen;
-		console.log(timeChosen, whoseTurn.team);
 	};
 
 	const execChooseATeam = async (team) => {
@@ -44,10 +44,10 @@
 
 		try {
 			console.log('sub');
-			const mySubscription = supabase
+			const ps = supabase
 				.from('ps')
-				.on('UPDATE', (payload) => {
-					console.log(payload);
+				.on('*', (payload) => {
+					console.log('Change received!', payload);
 					execRenderTurn();
 				})
 				.subscribe();
@@ -71,6 +71,14 @@
 	};
 
 	const execChooseTime = async (time, team) => {
+		loading('Wysyłanie...');
+		if (isNaN(parseInt(time))) {
+			await sleep(1000);
+			toast.pop();
+			failure('Podana wartość musi być liczbą!', 5000);
+			return;
+		}
+
 		try {
 			thinking = true;
 			await chooseTime(time, team);
@@ -79,6 +87,9 @@
 				.update([{ timeChosen: true }])
 				.eq('team', team);
 			execRenderTurn();
+			await sleep(500);
+			toast.pop();
+			success('Wysłano!');
 		} finally {
 			thinking = false;
 		}
@@ -136,7 +147,7 @@
 				<br />
 			</form>
 		</div>
-	{:else if whoseTurn.team === team && timeChosen === false}
+	{:else if whoseTurn?.team === team && timeChosen === false}
 		<div class="flex items-center justify-center w-screen h-screen bg-gray-800">
 			<form
 				class="flex flex-col items-center justify-center p-10 bg-gray-200 rounded shadow-md"
@@ -156,29 +167,22 @@
 				</svg>
 				<p class="mb-5 text-3xl text-gray-600 uppercase">{team}</p>
 				<p class="mb-5 text-xl text-gray-600 uppercase">Twoja Kolej</p>
+				<input
+					type="text"
+					name="seconds"
+					bind:value={seconds}
+					class="p-3 mb-5 border-2 rounded outline-none bg-zinc-100 w-80 focus:border-blue-500 disabled:bg-gray-500"
+					autocomplete="off"
+					placeholder="Ile sekund?"
+					disabled={thinking}
+				/>
 				<button
 					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
 					id="login"
 					type="submit"
 					disabled={thinking}
-					on:click={() => execChooseTime(4, team)}
-					><span>4</span>
-				</button>
-				<button
-					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
-					id="login"
-					type="submit"
-					disabled={thinking}
-					on:click={() => execChooseTime(8, team)}
-					><span>8</span>
-				</button>
-				<button
-					class="p-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 w-80 disabled:bg-gray-500"
-					id="login"
-					type="submit"
-					disabled={thinking}
-					on:click={() => execChooseTime(12, team)}
-					><span>12</span>
+					on:click={() => execChooseTime(seconds, team)}
+					><span>Wyślij!</span>
 				</button>
 				<br />
 			</form>
@@ -228,14 +232,14 @@
 					on:click={() => execAnswerQuestion(team, answer, misc)}
 					><span>Wyślij!</span>
 				</button>
-				<button
+<!-- 				<button
 					class="p-2 font-bold text-white bg-red-500 rounded hover:bg-red-600 w-80 disabled:bg-gray-500"
 					id="login"
 					type="submit"
 					disabled={thinking}
 					on:click={() => execTakeover(team)}
 					><span>Przejmij!</span>
-				</button>
+				</button> -->
 				<br />
 			</form>
 		</div>

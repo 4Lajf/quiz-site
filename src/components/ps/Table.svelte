@@ -60,28 +60,28 @@
 		},
 		{
 			id: 'points',
-			name: '',
-			width: '1%'
+			name: 'P',
+			width: '10%'
 		},
 		{
 			id: 'isTurn',
-			name: '',
-			width: '1%'
+			name: 'X',
+			width: '10%'
 		},
 		{
 			id: 'seconds',
-			name: '',
-			width: '1%'
+			name: 'S',
+			width: '10%'
 		},
 		{
 			id: 'isTakeover',
-			name: '',
-			width: '1%'
+			name: 'T',
+			width: '10%'
 		},
 		{
 			id: 'takeoverDate',
 			name: '',
-			width: '1%'
+			width: '10%'
 		}
 	];
 

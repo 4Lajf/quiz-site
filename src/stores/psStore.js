@@ -30,7 +30,7 @@ export const answerQuestion = async (team, answer, misc) => {
     try {
         let { data: canAnswer, error } = await supabase
             .from('ps')
-            .select('canAnswer, isTakeover')
+            .select('canAnswer, isTurn')
             .eq('team', team);
         let { data: quizData, error: quizError } = await supabase
             .from('ps')
@@ -51,7 +51,7 @@ export const answerQuestion = async (team, answer, misc) => {
             return;
         }
 
-        if (canAnswer[0].isTakeover !== 'X') {
+/*         if (canAnswer[0].isTurn !== 'X') {
             toast.pop();
             await sleep(500);
             warn('Odpowiedź na nie swoje pytanie jest równoznaczna z przejęciem go', 10000);
@@ -59,7 +59,7 @@ export const answerQuestion = async (team, answer, misc) => {
                 .from('ps')
                 .update([{ isTakeover: 'X', takeoverDate: Date.now() }])
                 .eq('team', team);
-        }
+        } */
 
         const { data: dbdata, error: dberror } = await supabase
             .from('ps')
