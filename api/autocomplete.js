@@ -33508,11 +33508,11 @@ export default function handler(request, response) {
         let dataLength = data.length
         if (dataLength >= 50) {
             dataLength = 50;
+            data.splice(50, data.length);
         }
 
         for (let i = 0; i < dataLength; i++) {
             data[i] = `${data[i]}\n`
-
         }
         return data.join(``);
     }
