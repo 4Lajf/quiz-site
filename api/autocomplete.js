@@ -33510,7 +33510,7 @@ export default function handler(request, response) {
             dataLength = 50;
         }
 
-        for (let i = 0; i < data.length - 1; i++) {
+        for (let i = 0; i < dataLength; i++) {
             data[i] = `${data[i]}\n`
 
         }
