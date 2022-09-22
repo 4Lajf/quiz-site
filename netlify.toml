@@ -1,2 +1,5 @@
 [build]
 functions = 'functions'
+[[edge_functions]]
+function = "hello"
+path = "/hello"
