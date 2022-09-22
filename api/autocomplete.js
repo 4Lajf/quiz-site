@@ -33498,24 +33498,15 @@ let data;
 export default function handler(request, response) {
     const type = request.query.type
 
-    const autocomplete = (x) => {
-        data = [...x]
-
-        for (let i = 0; i < data.length; i++) {
-            data[i] = `${data[i]}\n`
-        }
-        return data;
-    }
-
     switch (type) {
         case 'titles':
             response.status(200).json({
-                body: autocomplete(titles)
+                body: titles
             });
             break;
         case 'artists':
             response.status(200).json({
-                body: autocomplete(artists)
+                body: artists
             });
             break;
         default:
