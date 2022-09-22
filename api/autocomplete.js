@@ -33504,6 +33504,12 @@ export default function handler(request, response) {
 
     const autocomplete = (data, query) => {
         data = filterData(data, query)
+
+        let dataLength = data.length
+        if (dataLength >= 50) {
+            dataLength = 50;
+        }
+
         for (let i = 0; i < data.length - 1; i++) {
             data[i] = `${data[i]}\n`
 
