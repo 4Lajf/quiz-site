@@ -1,8 +1,8 @@
 <script>
-	import { user } from '../../stores/authStore';
-	import Login from '../../components/Login.svelte';
-	import Table from '../../components/ps/Table.svelte';
-	import EventLog from '../../components/ps/eventLog/EventLog.svelte';
+	import { user } from '../../../stores/authStore';
+	import Login from '../../../components/Login.svelte';
+	import Table from '../../../components/ps/Table.svelte';
+	import EventLog from '../../../components/ps/eventLog/EventLog.svelte';
 </script>
 
 <main>

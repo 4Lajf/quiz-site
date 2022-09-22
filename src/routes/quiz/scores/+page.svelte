@@ -1,5 +1,5 @@
 <script>
-	import TableScores from '../../components/quiz/TableScores.svelte';
+	import TableScores from '../../../components/quiz/TableScores.svelte';
 </script>
 
 <main>

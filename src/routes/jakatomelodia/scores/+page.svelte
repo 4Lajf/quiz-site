@@ -1,5 +1,5 @@
 <script>
-	import TableScores from '../../components/jakatomelodia/TableScores.svelte';
+	import TableScores from '../../../components/jakatomelodia/TableScores.svelte';
 </script>
 
 <main>

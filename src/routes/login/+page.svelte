@@ -1,6 +1,6 @@
 <script>
-	import Login from '../components/Login.svelte';
-	import { user } from '../stores/authStore';
+	import Login from '../../components/Login.svelte';
+	import { user } from '../../stores/authStore';
 	import { goto } from '$app/navigation';
 </script>
 
