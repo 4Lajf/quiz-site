@@ -1,4 +1,4 @@
-let artists = [`ALI PROJECT`,
+const artists = [`ALI PROJECT`,
     `Tomoyo Mitani (LieN)`,
     `See-Saw`,
     `Yuriko Kaida`,
@@ -10626,7 +10626,7 @@ let artists = [`ALI PROJECT`,
     `Fumio Otsuka`,
     `Fumio Ootsuka`,]
 
-let titles = [`GOD DIVA`,
+const titles = [`GOD DIVA`,
     `Deepest Memories`,
     `Liar's Smile`,
     `Obsession`,
@@ -33501,7 +33501,7 @@ export default function handler(request, response) {
         for (let i = 0; i < data.length; i++) {
             data[i] = `${data[i]}\n`
         }
-        return data.join(``);
+        return data;
     }
 
     switch (type) {
