@@ -1,4 +1,4 @@
-const artists = [`ALI PROJECT`,
+let artists = [`ALI PROJECT`,
     `Tomoyo Mitani (LieN)`,
     `See-Saw`,
     `Yuriko Kaida`,
@@ -10626,7 +10626,7 @@ const artists = [`ALI PROJECT`,
     `Fumio Otsuka`,
     `Fumio Ootsuka`,]
 
-const titles = [`GOD DIVA`,
+let titles = [`GOD DIVA`,
     `Deepest Memories`,
     `Liar's Smile`,
     `Obsession`,
@@ -33494,27 +33494,32 @@ const titles = [`GOD DIVA`,
     `Zukkoke Paradise`,
     `Kokoro no Naka no Evergreen`,]
 
-let data;
 export default function handler(request, response) {
+    const query = request.query.query
     const type = request.query.type
 
-    const autocomplete = (response) => {
-        data = response
-        for (let i = 0; i < data.length; i++) {
+    const filterData = (data, query) => {
+        return data
+    }
+
+    const autocomplete = (data, query) => {
+        data = filterData(data, query)
+        for (let i = 0; i < data.length - 1; i++) {
             data[i] = `${data[i]}\n`
+
         }
-        return data;
+        return data.join(``);
     }
 
     switch (type) {
-        case 'titles':
+        case 'title':
             response.status(200).json({
-                body: autocomplete(titles)
+                body: autocomplete(titles, query)
             });
             break;
-        case 'artists':
+        case 'artist':
             response.status(200).json({
-                body: autocomplete(artists)
+                body: autocomplete(artists, query)
             });
             break;
         default:
