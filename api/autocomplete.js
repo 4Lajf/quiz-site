@@ -33494,10 +33494,12 @@ const titles = [`GOD DIVA`,
     `Zukkoke Paradise`,
     `Kokoro no Naka no Evergreen`,]
 
+let data;
 export default function handler(request, response) {
     const type = request.query.type
 
-    const autocomplete = (data) => {
+    const autocomplete = (response) => {
+        data = response
         for (let i = 0; i < data.length; i++) {
             data[i] = `${data[i]}\n`
         }
