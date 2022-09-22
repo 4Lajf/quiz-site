@@ -16,7 +16,6 @@
 		"cross-env": "^7.0.3",
 		"eslint": "^7.32.0",
 		"eslint-plugin-svelte3": "^3.2.1",
-		"netlify-plugin-js-obfuscator": "^1.0.21",
 		"postcss": "^8.4.5",
 		"postcss-cli": "^9.1.0",
 		"postcss-load-config": "^3.1.1",
@@ -32,6 +31,7 @@
 		"@supabase/supabase-js": "^1.28.6",
 		"bcrypt": "^5.0.1",
 		"gridjs-svelte": "^2.1.1",
+		"node-fetch": "^3.2.10",
 		"svelte-local-storage-store": "^0.2.6"
 	}
 }
