@@ -33495,37 +33495,24 @@ let titles = [`GOD DIVA`,
     `Kokoro no Naka no Evergreen`,]
 
 export default function handler(request, response) {
-    const query = request.query.query
     const type = request.query.type
 
-    const filterData = (data, query) => {
-        return data.filter((x => x.toLowerCase().includes(query.toLowerCase())))
-    }
-
-    const autocomplete = (data, query) => {
-        data = filterData(data, query)
-
-        let dataLength = data.length
-        if (dataLength >= 50) {
-            dataLength = 50;
-            data.splice(50, data.length);
-        }
-
-        for (let i = 0; i < dataLength; i++) {
+    const autocomplete = (data) => {
+        for (let i = 0; i < data.length; i++) {
             data[i] = `${data[i]}\n`
         }
         return data.join(``);
     }
 
     switch (type) {
-        case 'title':
+        case 'titles':
             response.status(200).json({
-                body: autocomplete(titles, query)
+                body: autocomplete(titles)
             });
             break;
-        case 'artist':
+        case 'artists':
             response.status(200).json({
-                body: autocomplete(artists, query)
+                body: autocomplete(artists)
             });
             break;
         default:
