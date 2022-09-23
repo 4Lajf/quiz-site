@@ -10627,6 +10627,7 @@ const artists = [`ALI PROJECT`,
     `Fumio Ootsuka`,]
 
 const titles = [`GOD DIVA`,
+    `Rightfully`,
     `Clattanoia`,
     `SPLASH FREE`,
     `This Game`,
@@ -33516,6 +33517,11 @@ export default function handler(request, response) {
         case 'artists':
             response.status(200).json({
                 body: artists
+            });
+            break;
+        case 'version':
+            response.status(200).json({
+                body: 1.53
             });
             break;
         default:
