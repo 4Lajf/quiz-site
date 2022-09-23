@@ -23,4 +23,5 @@ You will need to create an account with Supabase and modify the code to allow yo
 - `/quiz` - normal quiz
 - `/ps` - created for specific contest where participants give host a number of seconds the media will be played for. It has more features than the standard quiz but they are planned to be copied there as well. 
 - `/jakatomelodia` - UI for a song guessing contest where participants can bid on how many notes a song will play.
+- `/wof` - Wheel of Fortune kind of game. Guess the anime names (or whatever really) by missing letters. 
 - `/api/autocomplete` - API for my other repo `amq-scripts/amqBetterSongArtist.js`. It serves as a database so the autocomplete (dropdown) that is used in this script can be automatically updated.
