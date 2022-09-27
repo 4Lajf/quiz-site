@@ -1,38 +1,27 @@
-# create-svelte
+# Quiz Site
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+A site that allows you to easily gather answers from your participants
 
-## Creating a project
+## Installing
+It's not really meant to be a 1-click install as I was developing this for myself
+You will need a Supabse account. 
+- Go create a database and note your Supabse project link and public api key. 
+- Add them to your `.env` file under `VITE_PUBLIC_SUPABASE_URL` and `.VITE_PUBLIC_SUPABASE_ANON_KEY`
+- Create tables `quiz`, `quizEvents`, `ps`, `psEvents`, `JTM`, `JTMEvents`
+- quiz schema `id: int8`, `team: text`, `answer: text`,`misc: text`, `points: numeric`, `canAnswer: bool`
+- quizEvents schema `id: int8`, `name: text`, `event: text`
+- ps schema 
+(more robust version of quiz, will implement there soon too) 
+`id: int8`, `team: text`, `answer: text`,`misc: text`, `points: numeric`, `canAnswer: bool`, `isTurn: text`, `roundNumber: numeric`, `isTakeover: text`, `takeoverDate: text`, `seconds: numeric`, `timeChosen: bool`
+- psEvents schema `same as quizEvents`
+- JTM schema `id: int8`, `team: text`, `notes: numeric`, `points: numeric`, `canAnswer: bool`, `date: numeric`
+- JTMEvents schema `same as quizEvents`
+## Routes
+*You can append each route (except `/api`) with `/admin` for admin console or `/scores` for public scores
+You will need to create an account with Supabase and modify the code to allow your email to be able to use the admin console*
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
-```
-
-> Note: the `@next` is temporary
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+- `/quiz` - normal quiz
+- `/ps` - created for specific contest where participants give host a number of seconds the media will be played for. It has more features than the standard quiz but they are planned to be copied there as well. 
+- `/jakatomelodia` - UI for a song guessing contest where participants can bid on how many notes a song will play.
+- `/wof` - Wheel of Fortune kind of game. Guess the anime names (or whatever really) by missing letters. 
+- `/api/autocomplete` - API for my other repo `amq-scripts/amqBetterSongArtist.js`. It serves as a database so the autocomplete (dropdown) that is used in this script can be automatically updated.
