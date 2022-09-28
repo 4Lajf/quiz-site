@@ -133968,6 +133968,14 @@ const titles = [
     {
         "id": 22867,
         "entry": "Kokoro no Naka no Evergreen"
+    },
+    {
+        "id": 22868,
+        "entry": "Paradisus-Paradoxum"
+    },
+    {
+        "id": 22869,
+        "entry": "Styx Helix"
     }
 ]
 const uniqueArtists = [
