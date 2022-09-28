@@ -33492,7 +33492,7 @@ const titles = [`GOD DIVA`,
     `Zukkoke Paradise`,
     `Kokoro no Naka no Evergreen`,]
 
-const loneArtists = [`ROUND TABLE`,
+const uniqueArtists = [`ROUND TABLE`,
     `Nino`,
     `Hana Satou`,
     `Raja-sensei`,
@@ -42937,9 +42937,9 @@ export default function handler(request, response) {
                 body: artists
             });
             break;
-        case 'loneArtists':
+        case 'uniqueArtists':
             response.status(200).json({
-                body: loneArtists
+                body: uniqueArtists
             });
             break;
         default:
