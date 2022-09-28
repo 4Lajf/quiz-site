@@ -133970,7 +133970,7 @@ const titles = [
         "entry": "Kokoro no Naka no Evergreen"
     }
 ]
-const loneArtists = [
+const uniqueArtists = [
     {
         "id": 0,
         "entry": "ROUND TABLE"
@@ -171699,9 +171699,9 @@ export default function handler(request, response) {
                 body: artists
             });
             break;
-        case 'loneArtists':
+        case 'uniqueArtists':
             response.status(200).json({
-                body: loneArtists
+                body: uniqueArtists
             });
             break;
         default:
