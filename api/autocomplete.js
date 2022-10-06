@@ -42922,7 +42922,6 @@ const uniqueArtists = [`ROUND TABLE`,
     `Beit, High×Joker, W`,
 ]
 
-let data;
 export default function handler(request, response) {
     const type = request.query.type
 

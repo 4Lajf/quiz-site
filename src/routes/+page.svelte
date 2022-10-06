@@ -1,7 +1,5 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { user } from '../stores/authStore.js';
-	import Login from '../components/Login.svelte';
 </script>
 
 <main>
@@ -21,27 +19,27 @@
 				<div class="flex justify-center">
 					<button
 						class="flex items-center px-6 py-4 mr-2 font-bold text-gray-300 transition ease-in-out border-2 border-gray-200 rounded-sm hover:bg-gray-200 hover:text-gray-800 duration-250"
-						on:click={() => goto('todo')}
-					>
-						Todo
-					</button>
-					<button
-						class="flex items-center px-6 py-4 mr-2 font-bold text-gray-300 transition ease-in-out border-2 border-gray-200 rounded-sm hover:bg-gray-200 hover:text-gray-800 duration-250"
 						on:click={() => goto('quiz')}
 					>
 						Quiz
 					</button>
 					<button
 						class="flex items-center px-6 py-4 mr-2 font-bold text-gray-300 transition ease-in-out border-2 border-gray-200 rounded-sm hover:bg-gray-200 hover:text-gray-800 duration-250"
-						on:click={() => goto('/jakatomelodia')}
+						on:click={() => goto('ps')}
+					>
+						Zgadnij po X sekund
+					</button>
+					<button
+						class="flex items-center px-6 py-4 mr-2 font-bold text-gray-300 transition ease-in-out border-2 border-gray-200 rounded-sm hover:bg-gray-200 hover:text-gray-800 duration-250"
+						on:click={() => goto('jakatomelodia')}
 					>
 						Jaka To Melodia?
 					</button>
 					<button
 						class="flex items-center px-6 py-4 mr-2 font-bold text-gray-300 transition ease-in-out border-2 border-gray-200 rounded-sm hover:bg-gray-200 hover:text-gray-800 duration-250"
-						on:click={() => goto('/amq')}
+						on:click={() => goto('wof')}
 					>
-						AMQ
+						Koło Fortuny
 					</button>
 				</div>
 			</div>
