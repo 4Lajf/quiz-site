@@ -8,7 +8,8 @@
 		<div class="container flex flex-col items-center justify-center px-5 py-24 mx-auto">
 			<div class="w-full text-center lg:w-2/3">
 				<h1 class="mb-4 font-mono text-3xl font-medium text-gray-300 title-font sm:text-4xl">
-					Tsuru 2022 - Chat Room
+					Tsuru 2022 - Chat Room<br>
+					Kliknij w ikonę Discorda by dołączyć
 				</h1>
 			</div>
 		</div>
