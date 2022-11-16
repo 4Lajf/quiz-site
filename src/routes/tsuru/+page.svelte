@@ -10,14 +10,13 @@
 				<h1 class="mb-4 font-mono text-3xl font-medium text-gray-300 title-font sm:text-4xl">
 					Tsuru 2022 - Chat Room
 				</h1>
-				<widgetbot
-					server="1042541017909432420"
-					channel="1042541020052734024"
-					width="800"
-					height="600"
-				/>
-				<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 			</div>
 		</div>
 	</section>
+	<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+		new Crate({
+			server: '1042541017909432420', // Tsuru 2022
+			channel: '1042541020052734024' // #general
+		});
+	</script>
 </main>
