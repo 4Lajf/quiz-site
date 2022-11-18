@@ -240,7 +240,19 @@
 				{ name: 'Date a Live', category: 'anime' },
 				{ name: 'Engage Kiss', category: 'anime' },
 				{ name: 'Tate no Yuusha no Nariagari', category: 'anime' },
-				{ name: 'Machikado Mazoku', category: 'anime' }
+				{ name: 'Machikado Mazoku', category: 'anime' },
+				{ name: 'Yofukashi no Uta', category: 'anime' },
+				{ name: 'Kinsou no Vermeil', category: 'anime' },
+				{ name: 'Lycoris Recoil', category: 'anime' },
+				{ name: 'Isekai Ojisan', category: 'anime' },
+				{ name: 'Engage Kiss', category: 'anime' },
+				{ name: 'Chainsaw Man', category: 'anime' },
+				{ name: 'Kage no Jitsuryokusha ni Naritakute', category: 'anime' },
+				{ name: 'Tensei Shitara Ken Deshita', category: 'anime' },
+				{ name: 'BLUE LOCK', category: 'anime' },
+				{ name: 'Renai Flops', category: 'anime' },
+				{ name: 'Akiba Maid Sensou', category: 'anime' },
+				{ name: 'Arknights Reimei Zensou', category: 'anime' },
 			];
 		} else {
 			quizData = [
@@ -438,7 +450,19 @@
 				{ name: 'Date a Live', category: 'anime' },
 				{ name: 'Engage Kiss', category: 'anime' },
 				{ name: 'The Rising of the Shield Hero', category: 'anime' },
-				{ name: 'The Demon Girl Next Door', category: 'anime' }
+				{ name: 'The Demon Girl Next Door', category: 'anime' },
+				{ name: 'Call of the Night', category: 'anime' },
+				{ name: 'Vermeil in Gold', category: 'anime' },
+				{ name: 'Lycoris Recoil', category: 'anime' },
+				{ name: 'Uncle from Another World', category: 'anime' },
+				{ name: 'Engage Kiss', category: 'anime' },
+				{ name: 'Chainsaw Man', category: 'anime' },
+				{ name: 'The Eminence in Shadow', category: 'anime' },
+				{ name: 'Reincarnated as a Sword', category: 'anime' },
+				{ name: 'BLUE LOCK', category: 'anime' },
+				{ name: 'Renai Flops', category: 'anime' },
+				{ name: 'Akiba Maid War', category: 'anime' },
+				{ name: 'Arknights PRELUDE TO DAWN', category: 'anime' },
 			];
 		}
 		// picks a word at random
@@ -1316,7 +1340,7 @@
 		<section id="intro" class="relative wrapper style1 fullscreen">
 			<div class="relative bottom-[20vh]">
 				<center>
-					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">DARMOWE ;), zakręć, zgadnij i wygraj mange lub Pocky :></h2>
+					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">DARMOWE ;)</h2>
 					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">Kategoria: {category}</h2>
 					<h2 class="opacity-[90%] text-4xl font-bold py-5 text-white">Wynik: {score}</h2>
 					<!-- svelte-ignore a11y-missing-content -->
