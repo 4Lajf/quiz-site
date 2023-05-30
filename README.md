@@ -8,15 +8,6 @@ You will need a Supabse account.
 - Go create a database and note your Supabse project link and public api key. 
 - Add them to your `.env` file under `VITE_PUBLIC_SUPABASE_URL` and `.VITE_PUBLIC_SUPABASE_ANON_KEY`
 ### Upload database dump to your server [here](https://github.com/4Lajf/quiz-site/blob/master/dump-postgres-202305301432)
-- Create tables `quiz`, `quizEvents`, `ps`, `psEvents`, `JTM`, `JTMEvents`
-- quiz schema `id: int8`, `team: text`, `answer: text`,`misc: text`, `points: numeric`, `canAnswer: bool`
-- quizEvents schema `id: int8`, `name: text`, `event: text`
-- ps schema 
-(more robust version of quiz, will implement there soon too) 
-`id: int8`, `team: text`, `answer: text`,`misc: text`, `points: numeric`, `canAnswer: bool`, `isTurn: text`, `roundNumber: numeric`, `isTakeover: text`, `takeoverDate: text`, `seconds: numeric`, `timeChosen: bool`
-- psEvents schema `same as quizEvents`
-- JTM schema `id: int8`, `team: text`, `notes: numeric`, `points: numeric`, `canAnswer: bool`, `date: numeric`
-- JTMEvents schema `same as quizEvents`
 ## Routes
 *You can append each route (except `/api`) with `/admin` for admin console or `/scores` for public scores
 You will need to create an account with Supabase and modify the code to allow your email to be able to use the admin console*
