@@ -7,6 +7,7 @@ It's not really meant to be a 1-click install as I was developing this for mysel
 You will need a Supabse account. 
 - Go create a database and note your Supabse project link and public api key. 
 - Add them to your `.env` file under `VITE_PUBLIC_SUPABASE_URL` and `.VITE_PUBLIC_SUPABASE_ANON_KEY`
+### Upload database dump to your server [here](https://github.com/4Lajf/quiz-site/blob/master/dump-postgres-202305301432)
 - Create tables `quiz`, `quizEvents`, `ps`, `psEvents`, `JTM`, `JTMEvents`
 - quiz schema `id: int8`, `team: text`, `answer: text`,`misc: text`, `points: numeric`, `canAnswer: bool`
 - quizEvents schema `id: int8`, `name: text`, `event: text`
