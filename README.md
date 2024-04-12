@@ -1,3 +1,6 @@
+# Currently broken and not maintained
+Maybe I will replace it with a better version someday, that code is from my early days in tech and was quite bad.
+
 # Quiz Site
 
 A site that allows you to easily gather answers from your participants
